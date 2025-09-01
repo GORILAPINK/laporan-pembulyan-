@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan Bullying SMP</title>
+<style>
+/* === Global Styles === */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Times New Roman', serif;
+  background: #f5f7fa;
+  color: #1f2937;
+}
+
+.container {
+  max-width: 720px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+h2 {
+  text-align: center;
+  color: #2563eb;
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+h3 {
+  margin-top: 25px;
+  color: #374151;
+  font-size: 18px;
+  border-left: 5px solid aliceblue;
+  padding-left: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  background: #f9fafb;
+  transition: 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 6px rgba(37,99,235,0.3);
+  background: #fff;
+}
+
+textarea { resize: vertical; min-height: 100px; }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-bottom: 15px;
+}
+
+.row .col { flex: 1; min-width: 160px; }
+
+button, .wa-link {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-next { background: #2563eb; color: #fff; }
+.btn-prev { background: #6b7280; color: #fff; }
+.btn-submit { background: #2563eb; color: #fff; width: 100%; margin-top: 10px; }
+.btn-action { background: #00ebdc; color: #fff; margin-top: 5px; }
+
+.btn-next:hover { background: #1e40af; }
+.btn-prev:hover { background: #4b5563; }
+.btn-submit:hover { background: #1e40af; }
+.btn-action:hover { background: magenta; }
+
+.section { display: none; animation: fadeIn 0.5s; }
+.hasil {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f0fdf4;
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px dashed #22c55e;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: #2563eb;
+  color: white;
+  margin-top: 2rem;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+video { border-radius: 12px; background: #000; width: 100%; height: 240px; }
+canvas { display: none; }
+.file-preview { margin-top: 10px; }
+.file-preview img, .file-preview video {
+  max-width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width: 600px) { .row { flex-direction: column; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>📋 Form Laporan Bullying SMP</h2>
+<form id="laporanForm">
+
+<!-- Section 1: Data Korban -->
+<div class="section" id="section1">
+  <h3>Data Korban</h3>
+  <div class="row">
+    <div class="col"><label>Nama Korban</label><input type="text" name="nama_korban" required></div>
+    <div class="col"><label>Kelas Korban</label><input type="text" name="kelas_korban" required></div>
+  </div>
+  <div class="row">
+    <div class="col"><label>Usia Korban</label><input type="number" name="usia_korban" required></div>
+    <div class="col"><label>Gender Korban</label>
+      <select name="gender_korban" required>
+        <option value="">-- Pilih --</option>
+        <option>Laki-laki</option>
+        <option>Perempuan</option>
+      </select>
+    </div>
+  </div>
+  <label>Wali Kelas Korban</label><input type="text" name="wali_korban">
+  <button type="button" class="btn-next" onclick="nextSection(1)">Selanjutnya ➡️</button>
+</div>
+
+<!-- Section 2: Data Pelaku -->
+<div class="section" id="section2">
+  <h3>Data Pelaku</h3>
+  <div class="row">
+    <div class="col"><label>Nama Pelaku</label><input type="text" name="nama_pelaku" required></div>
+    <div class="col"><label>Kelas Pelaku</label><input type="text" name="kelas_pelaku" required></div>
+  </div>
+  <div class="row">
+    <div class="col"><label>Gender Pelaku</label>
+      <select name="gender_pelaku" required>
+        <option value="">-- Pilih --</option>
+        <option>Laki-laki</option>
+        <option>Perempuan</option>
+      </select>
+    </div>
+    <div class="col"><label>Tipe Pelaku</label>
+      <select name="tipe_pelaku" required>
+        <option value="">-- Pilih --</option>
+        <option>Siswa</option>
+        <option>Guru</option>
+      </select>
+    </div>
+  </div>
+  <label>Wali Kelas Pelaku</label><input type="text" name="wali_pelaku">
+  <button type="button" class="btn-prev" onclick="prevSection(2)">⬅️ Kembali</button>
+  <button type="button" class="btn-next" onclick="nextSection(2)">Selanjutnya ➡️</button>
+</div>
+
+<!-- Section 3: Waktu & Bentuk Bullying -->
+<div class="section" id="section3">
+  <h3>Waktu & Bentuk Bullying</h3>
+  <div class="row">
+    <div class="col"><label>Hari / Tanggal</label><input type="date" name="tanggal" required></div>
+    <div class="col"><label>Perkiraan Jam</label><input type="time" name="jam" required></div>
+  </div>
+  <label>Durasi Kejadian</label><input type="text" name="durasi">
+  <label>Guru Pengajar</label><input type="text" name="guru_pengajar">
+  <label>Jenis Bullying</label>
+  <select name="jenis_bullying" required>
+    <option value="">-- Pilih --</option>
+    <option>Fisik</option>
+    <option>Verbal</option>
+    <option>Psikis</option>
+    <option>Cyberbullying</option>
+    <option>Pelecehan Seksual</option>
+  </select>
+  <label>Deskripsi Kejadian</label>
+  <textarea name="deskripsi" placeholder="Ceritakan kronologi kejadian..." required></textarea>
+  <button type="button" class="btn-prev" onclick="prevSection(3)">⬅️ Kembali</button>
+  <button type="button" class="btn-next" onclick="nextSection(3)">Selanjutnya ➡️</button>
+</div>
+
+<!-- Section 4: Bukti & Kamera -->
+<div class="section" id="section4">
+  <h3>Bukti & Kamera</h3>
+  <label>Pilih Kamera</label>
+  <select id="pilihKamera">
+    <option value="environment">Belakang</option>
+    <option value="user">Depan</option>
+  </select>
+  <video id="video" autoplay playsinline></video>
+  <canvas id="canvas"></canvas>
+  <div style="margin-top:10px;">
+    <button type="button" class="btn-action" onclick="takePhoto()">📸 Ambil Foto</button>
+    <button type="button" class="btn-action" onclick="startRecording()">⏺ Rekam Video</button>
+    <button type="button" class="btn-action" onclick="stopRecording()">⏹ Stop Rekam</button>
+  </div>
+  <label>Lampiran Bukti Lain</label>
+  <input type="file" name="bukti" multiple id="fileBukti">
+  <div class="file-preview" id="filePreview"></div>
+  <div>
+    <button type="button" class="btn-prev" onclick="prevSection(4)">⬅️ Kembali</button>
+    <button type="button" class="btn-submit" onclick="sendWA()">Kirim WA</button>
+    <button type="button" class="btn-submit" onclick="exportPDF()">Ekspor PDF</button>
+    <button type="button" class="btn-submit" onclick="exportDOC()">Ekspor DOCX</button>
+  </div>
+</div>
+
+</form>
+<div id="hasil" class="hasil" style="display:none;"></div>
+</div>
+
+<footer>&copy; 2025 SMP Hebat | Laporan Bullying Online</footer>
+
+<!-- JS Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+<script>
+// === Navigation ===
+let currentSection = 1;
+showSection(currentSection);
+function showSection(n){
+  document.querySelectorAll('.section').forEach((sec,i)=>sec.style.display=(i+1===n)?'block':'none');
+}
+function nextSection(n){ currentSection=n+1; showSection(currentSection); }
+function prevSection(n){ currentSection=n-1; showSection(currentSection); }
+
+// === Kamera & Media ===
+const pilihKamera = document.getElementById('pilihKamera');
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+let mediaRecorder, recordedBlobs=[], currentStream=null;
+
+async function startCamera(facingMode){
+  if(currentStream) currentStream.getTracks().forEach(t=>t.stop());
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({video:{facingMode}, audio:true});
+    currentStream=stream; video.srcObject=stream;
+  }catch(err){ alert("Tidak bisa akses kamera: "+err.message); }
+}
+startCamera('environment');
+pilihKamera.addEventListener('change', ()=>startCamera(pilihKamera.value));
+
+function takePhoto(){
+  if(!video.srcObject){ alert("Kamera tidak aktif!"); return; }
+  canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+  canvas.getContext('2d').drawImage(video,0,0);
+  canvas.toBlob(blob=>{
+    const file = new File([blob],"foto_laporan.png",{type:"image/png"});
+    const dt = new DataTransfer(); dt.items.add(file);
+    document.getElementById('fileBukti').files = dt.files;
+    previewFiles(); alert("Foto berhasil diambil!");
+  });
+}
+function startRecording(){
+  if(!video.srcObject){ alert("Kamera tidak aktif!"); return; }
+  recordedBlobs=[]; 
+  mediaRecorder=new MediaRecorder(video.srcObject,{mimeType:'video/webm'});
+  mediaRecorder.ondataavailable=e=>{if(e.data && e.data.size>0) recordedBlobs.push(e.data);}
+  mediaRecorder.start(); alert("Rekaman dimulai...");
+}
+function stopRecording(){
+  if(!mediaRecorder) return;
+  mediaRecorder.stop();
+  const blob=new Blob(recordedBlobs,{type:'video/webm'});
+  const file=new File([blob],"video_laporan.webm",{type:'video/webm'});
+  const dt=new DataTransfer(); dt.items.add(file);
+  document.getElementById('fileBukti').files = dt.files;
+  previewFiles(); alert("Video berhasil direkam!");
+}
+
+// === Preview Files ===
+const fileInput = document.getElementById('fileBukti');
+const filePreview = document.getElementById('filePreview');
+fileInput.addEventListener('change', previewFiles);
+function previewFiles(){
+  filePreview.innerHTML='';
+  Array.from(fileInput.files).forEach(f=>{
+    if(f.type.startsWith("image/")){
+      const img=document.createElement('img'); img.src=URL.createObjectURL(f); filePreview.appendChild(img);
+    }else if(f.type.startsWith("video/")){
+      const vid=document.createElement('video'); vid.src=URL.createObjectURL(f); vid.controls=true; filePreview.appendChild(vid);
+    }else{
+      const p=document.createElement('p'); p.textContent=f.name; filePreview.appendChild(p);
+    }
+  });
+}
+
+// === Nomor Surat ===
+function getLastNomorSurat(){
+  let last = localStorage.getItem('lastNomorSurat'); 
+  if(!last){ localStorage.setItem('lastNomorSurat','0'); last='0'; } 
+  return parseInt(last,10);
+}
+function generateNomorSurat(){
+  let last = getLastNomorSurat(); let next = last+1;
+  localStorage.setItem('lastNomorSurat',next);
+  return `SMP/2025/${String(next).padStart(3,'0')}`;
+}
+
+// === WA & Export ===
+const form = document.getElementById('laporanForm');
+const hasilBox = document.getElementById('hasil');
+
+function sendWA(){
+  const data = new FormData(form); const lap={};
+  data.forEach((v,k)=>lap[k]=v); lap.nomor_surat=generateNomorSurat();
+  const nomorBK="6281234567890"; const nomorKepsek="6281987654321";
+  const pesan=encodeURIComponent(
+`📋 LAPORAN BULLYING SMP
+No Surat: ${lap.nomor_surat}
+Korban: ${lap.nama_korban} (${lap.kelas_korban}, ${lap.usia_korban} th, ${lap.gender_korban})
+Pelaku: ${lap.nama_pelaku} (${lap.kelas_pelaku}, ${lap.gender_pelaku}, ${lap.tipe_pelaku})
+Tanggal: ${lap.tanggal} ${lap.jam}
+Durasi: ${lap.durasi}
+Jenis: ${lap.jenis_bullying}
+Deskripsi: ${lap.deskripsi}`);
+  window.open(`https://wa.me/${nomorBK}?text=${pesan}`,'_blank');
+  window.open(`https://wa.me/${nomorKepsek}?text=${pesan}`,'_blank');
+  hasilBox.style.display="block"; hasilBox.innerHTML="✅ Laporan WA dibuat!";
+}
+
+function exportPDF(){
+  const data = new FormData(form); const lap={};
+  data.forEach((v,k)=>lap[k]=v); lap.nomor_surat=generateNomorSurat();
+  const { jsPDF }=window.jspdf; const doc=new jsPDF(); doc.setFont("Times","Normal"); let y=10;
+  doc.text("LAPORAN BULLYING SMP",105,y,{align:'center'}); y+=10;
+  doc.text(`No Surat: ${lap.nomor_surat}`,10,y); y+=10;
+  for(const key in lap){ doc.text(`${key}: ${lap[key]}`,10,y); y+=8; }
+  doc.text("Konklusi: Laporan ini dibuat resmi dan ditandatangani oleh BK & Kepala Sekolah.",10,y+8);
+  doc.save(`Laporan_Bullying_${lap.nomor_surat}.pdf`); alert("PDF berhasil diekspor!");
+}
+
+function exportDOC(){
+  const data = new FormData(form); const lap={};
+  data.forEach((v,k)=>lap[k]=v); lap.nomor_surat=generateNomorSurat();
+  let content=`LAPORAN BULLYING SMP\nNo Surat: ${lap.nomor_surat}\n`;
+  for(const key in lap){ content+=`${key}: ${lap[key]}\n`; }
+  content+="\nKonklusi: Laporan ini dibuat resmi dan ditandatangani BK & Kepala Sekolah.";
+  const blob=new Blob([content],{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
+  saveAs(blob, `Laporan_Bullying_${lap.nomor_surat}.docx`);
+  alert("DOCX berhasil diekspor!");
+}
+</script>
+
+</body>
+</html>
